@@ -17,7 +17,7 @@
    DARK THEME (Default Control Room Mode)
    Colors: Black (#08090b), Red (#e63946 / #d90429), Honey Gold (#ffb703 / #f59e0b)
    -------------------------------------------------------------------------- */
-[data-theme="dark"] {
+:root[data-theme="dark"], html[data-theme="dark"], body[data-theme="dark"], [data-theme="dark"] {
     --bg-base: #08090b;
     --bg-surface: #101217;
     --bg-card: #151820;
@@ -57,16 +57,16 @@
 
 /* --------------------------------------------------------------------------
    LIGHT THEME (Clean Room & Factory Quality Office Mode)
-   Colors: Rich Violet (#6d28d9 / #581c87), Feather Blue (#e0f2fe / #38bdf8 / #f0f7ff)
+   Colors: Rich Violet (#6d28d9 / #7c3aed), Feather Blue (#e0f0fe / #0284c7)
    -------------------------------------------------------------------------- */
-[data-theme="light"] {
-    --bg-base: #f0f7ff;          /* Feather blue airy mist */
+:root[data-theme="light"], html[data-theme="light"], body[data-theme="light"], [data-theme="light"] {
+    --bg-base: #e2f0fd;          /* Distinct feather-blue light atmospheric mist */
     --bg-surface: #ffffff;
-    --bg-card: #f8fbff;
-    --bg-card-hover: #edf4fe;
-    --bg-subtle: #e1edfc;
+    --bg-card: #f0f7ff;
+    --bg-card-hover: #e0f2fe;
+    --bg-subtle: #dbeafe;
     
-    --border-color: #cbd5e1;
+    --border-color: #93c5fd;     /* Visible feather-blue border */
     --border-focus: #7c3aed;
     
     --text-primary: #0f172a;
@@ -75,14 +75,14 @@
     
     --brand-violet: #6d28d9;
     --brand-violet-dark: #4c1d95;
-    --brand-violet-glow: rgba(109, 40, 217, 0.25);
+    --brand-violet-glow: rgba(109, 40, 217, 0.35);
     
     --feather-blue: #0284c7;
-    --feather-blue-soft: #e0f2fe;
-    --feather-blue-glow: rgba(56, 189, 248, 0.3);
+    --feather-blue-soft: #bae6fd;
+    --feather-blue-glow: rgba(2, 132, 199, 0.3);
     
-    --accent-primary: var(--brand-violet);
-    --accent-secondary: var(--feather-blue);
+    --accent-primary: #7c3aed;   /* Violet accent */
+    --accent-secondary: #0284c7; /* Feather blue */
     
     --status-pass: #059669;
     --status-pass-glow: rgba(5, 150, 105, 0.25);
@@ -90,11 +90,11 @@
     --status-warn: #d97706;
     --status-info: #0284c7;
     
-    --canvas-bg: #f8fafc;
-    --canvas-grid: rgba(109, 40, 217, 0.08);
+    --canvas-bg: #e2e8f0;
+    --canvas-grid: rgba(109, 40, 217, 0.12);
     --laser-color: #7c3aed;
-    --laser-glow: 0 0 12px #7c3aed, 0 0 22px rgba(124, 58, 237, 0.7);
-    --shadow-card: 0 4px 15px rgba(2, 132, 199, 0.08);
+    --laser-glow: 0 0 14px #7c3aed, 0 0 24px rgba(124, 58, 237, 0.7);
+    --shadow-card: 0 4px 18px rgba(2, 132, 199, 0.12);
 }
 
 /* Base Styles */
