@@ -1,0 +1,24 @@
+/* Light theme */
+body[data-theme="light"] {
+    background-color: #f5f7ff; /* feather blue */
+    color: #111;
+}
+header[data-theme="light"], footer[data-theme="light"] {
+    background-color: #e0e7ff;
+}
+
+/* Dark theme */
+body[data-theme="dark"] {
+    background-color: #121212; /* black */
+    color: #eee;
+}
+header[data-theme="dark"], footer[data-theme="dark"] {
+    background-color: #1a0000;
+    color: #ffdddd;
+}
+
+/* Accent colors */
+:root {
+    --accent-light: #8a2be2; /* violet */
+    --accent-dark: #d4af37; /* honey gold */
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detect Labs</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <header>
+        <h1>Detect Labs</h1>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙/☀️</button>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>AI‑Powered Industrial Visual Inspection &amp; Quality Management</h2>
+            <p>Real‑time defect detection, quality analytics, and production‑line monitoring.</p>
+            <a href="/demo" class="cta">Explore Features</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Detect Labs. All rights reserved.</p>
+    </footer>
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+        const current = localStorage.getItem('theme') || 'light';
+        root.setAttribute('data-theme', current);
+        toggle.addEventListener('click', () => {
+            const newTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>

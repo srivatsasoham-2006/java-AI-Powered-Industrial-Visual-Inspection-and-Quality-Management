@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detect Labs | AI-Powered Industrial Visual Inspection & Quality Management</title>
+    <meta name="description" content="Industrial-grade AI visual inspection, automated defect detection, laser material scanning, and autonomous quality engineering suite.">
+    <link rel="icon" type="image/png" href="/static/logo.png">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Global Industrial Telemetry Banner -->
+    <div class="top-telemetry-bar">
+        <div class="telemetry-left">
+            <span class="status-pulse"></span>
+            <span class="telemetry-item"><strong id="node-name">EDGE-NODE-04 [JETSON AGX ORIN]</strong></span>
+            <span class="telemetry-divider">|</span>
+            <span class="telemetry-item">STAMP: <span id="telemetry-time">2026-10-27 15:00:00 UTC</span></span>
+            <span class="telemetry-divider">|</span>
+            <span class="telemetry-item">RECIPE: <span class="highlight-code">MIL-STD-883 / IATF-16949</span></span>
+        </div>
+        <div class="telemetry-right">
+            <span class="telemetry-item">FPS: <strong id="live-fps" class="gold-text">118.4</strong></span>
+            <span class="telemetry-divider">|</span>
+            <span class="telemetry-item">LATENCY: <strong id="live-latency" class="green-text">8.4 ms</strong></span>
+            <span class="telemetry-divider">|</span>
+            <span class="telemetry-item">GATE ACTUATOR: <span class="badge-ok">ARMED (14.2ms)</span></span>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="main-header">
+        <div class="header-brand">
+            <div class="logo-scanner-container">
+                <img src="/static/logo.png" alt="Detect Labs Logo" class="brand-logo" id="brand-logo-img">
+                <div class="scanner-sweep-ring"></div>
+            </div>
+            <div class="brand-text">
+                <div class="brand-title-row">
+                    <h1 class="brand-title">DETECT LABS</h1>
+                    <span class="brand-version">v4.1 PRO</span>
+                </div>
+                <p class="brand-subtitle">AI-Powered Industrial Visual Inspection &amp; Quality Management</p>
+            </div>
+        </div>
+
+        <nav class="header-nav">
+            <a href="#inspection-live" class="nav-link active" data-section="inspection-live">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                Live Vision HUD
+            </a>
+            <a href="#material-scanner" class="nav-link" data-section="material-scanner">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></svg>
+                Material Scanner
+            </a>
+            <a href="#spc-analytics" class="nav-link" data-section="spc-analytics">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                SPC &amp; Yield Analytics
+            </a>
+            <a href="#quality-qms" class="nav-link" data-section="quality-qms">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                QMS &amp; Audit Logs
+            </a>
+        </nav>
+
+        <div class="header-actions">
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle-btn" class="theme-switch" title="Toggle Theme (Dark / Light)">
+                <span class="theme-icon-dark">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </span>
+                <span class="theme-icon-light">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </span>
+                <span class="theme-label" id="theme-label-text">Dark Mode</span>
+            </button>
+
+            <a href="/api/export-audit" class="btn-industrial-secondary" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Export Audit CSV
+            </a>
+        </div>
+    </header>
+
+    <!-- Key Performance Indicator Cards Bar -->
+    <section class="kpi-strip">
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <span class="kpi-title">FIRST PASS YIELD (FPY)</span>
+                <span class="kpi-badge good">+0.14%</span>
+            </div>
+            <div class="kpi-value gold-text" id="kpi-fpy">99.18%</div>
+            <div class="kpi-subtext">Target: &gt; 99.00% (6-Sigma)</div>
+            <div class="kpi-progress-bar"><div class="kpi-progress-fill" style="width: 99.18%;"></div></div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <span class="kpi-title">DEFECT PPM RATE</span>
+                <span class="kpi-badge ok">Optimal</span>
+            </div>
+            <div class="kpi-value red-text" id="kpi-ppm">81.9</div>
+            <div class="kpi-subtext">Parts Per Million Inspected</div>
+            <div class="kpi-progress-bar"><div class="kpi-progress-fill alert" style="width: 8.2%;"></div></div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <span class="kpi-title">TOTAL INSPECTED</span>
+                <span class="kpi-badge info">Shift #2</span>
+            </div>
+            <div class="kpi-value" id="kpi-inspected">142,850</div>
+            <div class="kpi-subtext">Pass: <span class="green-text" id="kpi-passed">141,680</span> | Reject: <span class="red-text" id="kpi-rejected">1,170</span></div>
+            <div class="kpi-progress-bar"><div class="kpi-progress-fill" style="width: 98%;"></div></div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <span class="kpi-title">OVERALL EQUIPMENT EFFECTIVENESS</span>
+                <span class="kpi-badge good">Class A</span>
+            </div>
+            <div class="kpi-value gold-text" id="kpi-oee">94.6%</div>
+            <div class="kpi-subtext">Avail: 98.2% | Perf: 97.4% | Qual: 99.1%</div>
+            <div class="kpi-progress-bar"><div class="kpi-progress-fill" style="width: 94.6%;"></div></div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <main class="dashboard-grid">
+
+        <!-- Left Column: Live Inspection Feed & Vision HUD -->
+        <section id="inspection-live" class="dash-panel vision-hud-panel">
+            <div class="panel-header">
+                <div class="panel-title-group">
+                    <span class="panel-icon laser-dot"></span>
+                    <h2>HIGH-SPEED OPTICAL INSPECTION STREAM</h2>
+                    <span class="badge-live">LIVE FEED</span>
+                </div>
+                <div class="feed-controls">
+                    <select id="camera-source-select" class="select-industrial">
+                        <option value="cam-01">CAM-01: High-Res Telecentric AOI</option>
+                        <option value="cam-02">CAM-02: Infrared Sub-Surface Scanner</option>
+                        <option value="cam-03">CAM-03: 3D Laser Profilometer</option>
+                    </select>
+                    <button id="toggle-laser-btn" class="btn-tool active" title="Toggle Laser Scanning Line">
+                        LASER HUD: ON
+                    </button>
+                    <button id="toggle-bbox-btn" class="btn-tool active" title="Toggle AI Bounding Boxes">
+                        B-BOX: ON
+                    </button>
+                </div>
+            </div>
+
+            <div class="viewport-wrapper">
+                <!-- Inspection Canvas Overlay -->
+                <div class="canvas-container" id="vision-canvas-container">
+                    <canvas id="inspectionCanvas" width="760" height="460"></canvas>
+                    
+                    <!-- High-tech Grid & Crosshair Overlays -->
+                    <div class="hud-crosshair-center"></div>
+                    <div class="hud-corner top-left"></div>
+                    <div class="hud-corner top-right"></div>
+                    <div class="hud-corner bottom-left"></div>
+                    <div class="hud-corner bottom-right"></div>
+
+                    <!-- Target Coordinate HUD readout -->
+                    <div class="hud-readout-overlay">
+                        <div>FOV: <strong>320mm x 240mm</strong></div>
+                        <div>PIXEL PITCH: <strong>12.5 um/px</strong></div>
+                        <div>EXPOSURE: <strong>140 us</strong></div>
+                        <div>SHUTTER: <strong>GLOBAL ELECTRONIC</strong></div>
+                    </div>
+
+                    <!-- Audio-Visual Alarm Banner -->
+                    <div id="alarm-banner" class="alarm-hud-banner hidden">
+                        <span class="alarm-icon">⚠</span>
+                        <span id="alarm-text">ANOMALY DETECTED: MICRO-CRACK [AUTO-REJECT GATE ACTIVATED]</span>
+                    </div>
+                </div>
+
+                <!-- Live Stream Feed Footer Telemetry -->
+                <div class="feed-status-strip">
+                    <div class="feed-status-item">
+                        <span class="label">CURRENT PART:</span>
+                        <strong id="feed-current-part">WAFER-LOT-882B [DIES 044-098]</strong>
+                    </div>
+                    <div class="feed-status-item">
+                        <span class="label">CONVEYOR SPEED:</span>
+                        <strong id="feed-conveyor-speed">1.25 m/s</strong>
+                    </div>
+                    <div class="feed-status-item">
+                        <span class="label">INSPECTION RESULT:</span>
+                        <span id="feed-verdict-badge" class="badge-verdict pass">NORMAL / PASS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Column: Interactive Material Scanner & Defect Classifier -->
+        <section id="material-scanner" class="dash-panel material-scanner-panel">
+            <div class="panel-header">
+                <div class="panel-title-group">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    <h2>AUTONOMOUS MATERIAL SCANNER</h2>
+                </div>
+                <span class="badge-recipe" id="active-recipe-badge">RECIPE: ISO-9001-A</span>
+            </div>
+
+            <div class="scanner-body">
+                <div class="scanner-config-grid">
+                    <div class="control-group">
+                        <label for="material-select">Target Industrial Material:</label>
+                        <select id="material-select" class="select-industrial">
+                            <option value="mat-wafer">Silicon Semiconductor Wafer (300mm)</option>
+                            <option value="mat-casting">Cast Aluminum Engine Block Flange</option>
+                            <option value="mat-pcb">High-Density Interconnect PCB Assembly</option>
+                            <option value="mat-composite">Aerospace Carbon Fiber Panel</option>
+                            <option value="mat-battery">EV Lithium-Ion Pouch Cell Seam</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="defect-simulation-toggle">Anomaly Injection Simulation:</label>
+                        <div class="toggle-wrapper">
+                            <label class="switch">
+                                <input type="checkbox" id="defect-simulation-toggle" checked>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="toggle-status-text" id="simulation-toggle-label">Flaws Present (Reject Test)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Material Preview Stage with Laser Sweep -->
+                <div class="material-stage-wrapper">
+                    <div class="material-stage" id="materialStage">
+                        <div class="laser-scanner-line" id="laserScannerLine"></div>
+                        <canvas id="materialCanvas" width="480" height="260"></canvas>
+                        <div class="scanner-grid-overlay"></div>
+                    </div>
+
+                    <div class="stage-action-bar">
+                        <button id="trigger-scan-btn" class="btn-laser-scan">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></svg>
+                            EXECUTE PRECISION SCAN
+                        </button>
+                        <label class="btn-file-upload">
+                            <input type="file" id="material-file-input" accept="image/*" style="display:none;">
+                            <span>Upload Component Image</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Scan Results & Defect Telemetry Table -->
+                <div class="scan-analysis-result">
+                    <div class="analysis-summary-row">
+                        <div>
+                            <span class="meta-label">SCAN ID:</span>
+                            <span class="meta-val" id="res-scan-id">SCN-17298510</span>
+                        </div>
+                        <div>
+                            <span class="meta-label">INSPECTION TIME:</span>
+                            <span class="meta-val green-text" id="res-scan-time">8.32 ms</span>
+                        </div>
+                        <div>
+                            <span class="meta-label">VERDICT:</span>
+                            <span class="badge-verdict-large reject" id="res-scan-verdict">REJECT</span>
+                        </div>
+                    </div>
+
+                    <div class="defect-list-container">
+                        <table class="industrial-table" id="defects-table">
+                            <thead>
+                                <tr>
+                                    <th>Defect Type</th>
+                                    <th>Confidence</th>
+                                    <th>Location (X,Y)</th>
+                                    <th>Severity</th>
+                                    <th>Disposition Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="defects-table-body">
+                                <tr>
+                                    <td><span class="defect-bullet critical"></span> Die-Edge Chipping</td>
+                                    <td><strong>98.4%</strong></td>
+                                    <td>X:120, Y:140 (60x50)</td>
+                                    <td><span class="tag-crit">CRITICAL</span></td>
+                                    <td><span class="tag-reject">AUTO-REJECT</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="defect-bullet major"></span> Photoresist Void</td>
+                                    <td><strong>94.2%</strong></td>
+                                    <td>X:280, Y:210 (45x40)</td>
+                                    <td><span class="tag-maj">MAJOR</span></td>
+                                    <td><span class="tag-rework">REWORK STATION</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full Width Bottom Section: Statistical Process Control (SPC) & QMS -->
+        <section id="spc-analytics" class="dash-panel spc-panel">
+            <div class="panel-header">
+                <div class="panel-title-group">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+                    <h2>STATISTICAL PROCESS CONTROL (SPC) — X-BAR REAL-TIME DRIFT CHART</h2>
+                </div>
+                <div class="spc-stats-row">
+                    <span>CPK: <strong class="gold-text" id="spc-cpk">1.68</strong></span>
+                    <span>CP: <strong id="spc-cp">1.74</strong></span>
+                    <span>SIGMA: <strong id="spc-sigma">0.023</strong></span>
+                    <span>UCL: <strong class="red-text" id="spc-ucl">25.120 mm</strong></span>
+                    <span>NOMINAL: <strong class="gold-text" id="spc-nominal">25.000 mm</strong></span>
+                    <span>LCL: <strong class="red-text" id="spc-lcl">24.880 mm</strong></span>
+                </div>
+            </div>
+
+            <div class="spc-chart-wrapper">
+                <canvas id="spcChartCanvas" height="160"></canvas>
+            </div>
+        </section>
+
+        <!-- Quality Management System (QMS) & Batch Compliance Audit -->
+        <section id="quality-qms" class="dash-panel qms-panel">
+            <div class="panel-header">
+                <div class="panel-title-group">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                    <h2>QUALITY ASSURANCE BATCH AUDIT LOG &amp; TRACEABILITY (IATF-16949 / ISO-9001)</h2>
+                </div>
+                <div class="table-search-group">
+                    <input type="text" id="audit-search" placeholder="Filter by batch, material or verdict..." class="input-industrial">
+                    <a href="/api/export-audit" class="btn-industrial-small" download>
+                        Download CSV Report
+                    </a>
+                </div>
+            </div>
+
+            <div class="qms-table-wrapper">
+                <table class="industrial-table" id="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Scan ID</th>
+                            <th>Timestamp</th>
+                            <th>Material &amp; Component</th>
+                            <th>Lot / Batch #</th>
+                            <th>Inspection Verdict</th>
+                            <th>Defect Count</th>
+                            <th>Infer Latency</th>
+                            <th>Operator / Station</th>
+                            <th>Standard</th>
+                        </tr>
+                    </thead>
+                    <tbody id="audit-table-body">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Industrial Status Footer -->
+    <footer class="main-footer">
+        <div class="footer-col">
+            <div class="footer-brand-title">DETECT LABS QUALITY CLOUD</div>
+            <p>High-Throughput Machine Vision, Sub-Surface Laser Profiling, and Edge Quality Assurance.</p>
+        </div>
+        <div class="footer-col">
+            <div>HOST ENVIRONMENT: <strong>Microsoft Azure App Service (Linux)</strong></div>
+            <div>CLUSTER REGION: <strong>Central India (Zone 01)</strong></div>
+            <div>SCM ENDPOINT: <strong>java-web-hsh6bvcxedfsgxah.centralindia-01.azurewebsites.net</strong></div>
+        </div>
+        <div class="footer-col text-right">
+            <div>SECURITY: <strong>TLS 1.3 / Hardware Root of Trust</strong></div>
+            <div>AUDIT STANDARD: <strong>ISO 9001:2015 &amp; IATF 16949:2016</strong></div>
+            <div>&copy; 2026 Detect Labs Inc. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Audio Beep Engine for Industrial Reject Alarm (Using Web Audio API) -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
